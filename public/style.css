@@ -1,59 +1,91 @@
 * {
+
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
 }
 
 body {
-  font-family:sans-serif;
-  margin: 25px;
-  color: #222;
-  background-color: #f5f5f5;
+  height: 100vh;
+  width: 100%;
+  background-color: #1A1B32;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: monospace;
+  color: #FBFBFC;
 }
 
-h1 {
-  font-weight: bold;
-  
+.container {
+  height: 70vh;
+  width: 60vw;
+  background-color: #090A23;
+  border: 5px solid #FBFBFC;
+  border-radius: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }
 
-p {
-  max-width: 900px;
+
+
+.div1 {
+  grid-area: 1 / 1 / 2 / 7;
+
+}
+
+.div2 {
+  grid-area: 5 / 1 / 6 / 6;
+  background-color: rgb(223, 8, 194);
+
+}
+
+.div3 {
+  grid-area: 5 / 6 / 6 / 7;
+  background-color: rgb(184, 223, 13);
+
+}
+
+.div4 {
+  border: 1px solid black;
+  grid-area: 2 / 1 / 5 / 4;
+  background-color: rgb(31, 17, 216);
+
+}
+
+.div5 {
+  border: 1px solid black;
+
+  grid-area: 2 / 4 / 5 / 7;
+  background-color: rgb(27, 116, 16);
+
+}
+
+.rack {
+  padding: 1rem;
+  background-color: #2a2fb1;
+
 }
 
 form {
-  margin-bottom: 25px;
-  padding: 15px;
-  background-color: #87D37C;
-  display: inline-block;
-  width: 100%;
-  max-width: 340px;
-  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
 
 input {
-  display: block;
-  margin-bottom: 10px;
-  padding: 5px;
-  width: 100%;
-  border: 1px solid lightgrey;
-  border-radius: 3px;
-  font-size: 16px;
+  margin: 0.2rem;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+
 }
 
-input[type=submit] {
-  font-size: 16px;
-  border-radius: 3px;
-  background-color: #E4F1FE;
-  border: 1px solid grey;
-  box-shadow: 2px 2px #999;
-  cursor: pointer;
-}
+button {
+  margin: 1rem;
+  padding: 0.5rem 3rem;
+  border-radius: 0.2rem;
 
-input[type=submit]:hover {
-  background-color: #FFFEC4;
-}
-
-code {
-  font-family: monospace;
-  font-size: 1.2em;
-  background-color: #FFFEC4;
-  padding: 2px;
 }
