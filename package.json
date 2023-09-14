@@ -2,6 +2,7 @@
   "name": "fcc-exercise-tracker",
   "version": "0.1.0",
   "description": "A REST API project, part of Free Code Camp's curriculum",
+  "author": "Sebastian Benitez",
   "main": "index.mjs",
   "scripts": {
     "start": "node index.mjs"
@@ -22,5 +23,8 @@
   "keywords": [
     "node",
     "express"
-  ]
+  ],
+  "engines": {
+    "node": ">=18.17.0 <19"
+  }
 }
