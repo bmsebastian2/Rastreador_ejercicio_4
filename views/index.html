@@ -1,51 +1,40 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Exercise Tracker | freeCodeCamp</title>
-    <link
-      rel="shortcut icon"
-      href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico"
-      type="image/x-icon"
-    />
-    <link
-      href="https://fonts.googleapis.com/css?family=Roboto"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link href="style.css" rel="stylesheet" type="text/css" />
-  </head>
+<head>
+  <title>Sebastian BM | freeCodeCamp</title>
+  <link rel="shortcut icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico" type="image/x-icon" />
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
 
-  <body>
-    <div class="container">
-      <div class="div1 rack">
-        <h2>Rastreador de ejercicio 😎</h2>
-      </div>
-      <div class="div4 rack">
-        <form action="" method="post">
-          <p>Nuevo Usuario</p>
-          <button type="submit">submit</button>
-        </form>
-      </div>
-      <div class="div5 rack">
-        <form action="" method="post">
-          <p>Agregar ejercicio</p>
-          <input type="text" placeholder="ID" /><input
-            type="text"
-            placeholder="DESCRIPTION"
-          /><input type="text" placeholder="DURACION" /><input
-            type="text"
-            placeholder="DATE (YYYY-MM-DD)"
-          />
-          <button type="submit">submit</button>
-        </form>
-      </div>
-
-      <div class="div2 rack">
-        <p>by: bmsebastian2@gmail.com</p>
-      </div>
-      <div class="div3 rack">
-        <p>by: bmsebastian2@gmail.com</p>
-      </div>
+<body>
+  <div class="container">
+    <div class="div1 rack">
+      <h2>Rastreador de ejercicio 😎</h2>
     </div>
-  </body>
+    <div class="div4 rack">
+      <form action="/api/users" method="post">
+        <h3>Nuevo Usuario</h3>
+        <input type="text" placeholder="USERNAME" name="username" />
+        <input <button type="submit">submit</button>
+      </form>
+    </div>
+    <div class="div5 rack">
+      <form action="" method="post">
+        <h3>Agregar ejercicio</h3>
+        <input type="text" placeholder="ID" />
+        <input type="text" placeholder="DESCRIPTION" />
+        <input type="text" placeholder="DURATION(MINS)" /><input type="text" placeholder="DATE (YYYY-MM-DD)" />
+        <button type="submit">submit</button>
+      </form>
+    </div>
+
+    <div class="div2 rack">
+      <p>by: bmsebastian2@gmail.com</p>
+    </div>
+    <div class="div3 rack">
+      <p>by: bmsebastian2@gmail.com</p>
+    </div>
+  </div>
+</body>
 </html>
