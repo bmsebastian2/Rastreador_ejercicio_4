@@ -64,5 +64,51 @@ export const AddNewUser = (username) => {
     }
   });
 };
+export const findAllUsers = async () => await Schema.user.find();
+export const findUserById = async (id) => await Schema.user.findById(id).exec();
+export const findRegisterById = async (id) =>
+  await Schema.register.findById(id).exec();
 
-export const findUser = async () => await Schema.user.find();
+// export async function findRegister(id) {
+//   await Schema.register.find({ _id: id }).then((data) => {
+//     if (data.length > 0) {
+//       console.log("si hay algo");
+//     } else {
+//       console.log("No hay nada");
+//     }
+//   });
+// }
+
+export function newRegister(_id, username, description, duration, date) {
+  const newuRL = new Schema.register({
+    username,
+    count: 1,
+    _id,
+    log: [
+      {
+        description,
+        duration,
+        date,
+      },
+    ],
+  });
+  newuRL
+    .save()
+    .then((doc) => {
+      console.log("guardado");
+      console.log(doc);
+    })
+    .catch((err) => {
+      console.error("error al guardar:" + err);
+    });
+}
+
+export async function registerLog(register, newObject) {
+
+  const { log, count } = register;
+  let arrLog = log;
+  arrLog.push(newObject);
+  register.log = arrLog;
+  register.count += 1;
+  await register.save();
+}

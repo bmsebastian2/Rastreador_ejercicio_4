@@ -4,7 +4,15 @@ import cors from "cors";
 import * as url from "url";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
-import { AddNewUser, findUser } from "./schemanMongoo.mjs";
+import {
+  AddNewUser,
+  findUserById,
+  findAllUsers,
+  findRegisterById,
+  newRegister,
+  registerLog,
+} from "./schemanMongoo.mjs";
+import { now } from "mongoose";
 
 dotenv.config();
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
@@ -20,20 +28,55 @@ app.get("/", (req, res) => {
 // PRUEBA DEL 1 AL 6///////////////////////////
 
 app.get("/api/users", (req, res) => {
-  // MATRIZ lista de todos los usuarios
-  findUser().then((result) => {
+  findAllUsers().then((result) => {
     res.send(result);
   });
 });
 
 app.post("/api/users", (req, res) => {
-  //crear un nuevo usuario
   let userName = req.body.username;
   AddNewUser(userName).then((resp) => res.json(resp));
 });
 
 ////////////////////////////////////////////////
 
+// PRUEBA 6/////////////////////////////////////
+
+app.post("/api/users/:_id/exercises", (req, res) => {
+  const { description, duration, date, _id } = req.body;
+  const fecha = formatoFecha(date);
+
+  findUserById(_id).then((user) => {
+    if (user === null) {
+      res.send("_ID de usuario no existe");
+    } else {
+      findRegisterById(_id).then((register) => {
+        const { _id, username } = user;
+        if (register === null) {
+          console.log("No tiene exercices");
+          newRegister(_id, username, description, duration, fecha);
+        } else {
+          let newObject = { description, duration, date: fecha };
+          registerLog(register, newObject);
+          //res.send("ESTE ID SI TENE REGISTRO DE EXERCICES");
+        }
+        res.json({
+          _id,
+          username,
+          date: fecha,
+          duration: Number.parseInt(duration),
+          description,
+        });
+      });
+    }
+  });
+});
+///////////////////////////////////////////////
+
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
+
+function formatoFecha(date) {
+  return (date ? new Date(`${date}T00:00:00`) : new Date()).toDateString();
+}
