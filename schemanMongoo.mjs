@@ -105,7 +105,7 @@ export function newRegister(_id, username, description, duration, date) {
 
 export async function registerLog(register, newObject) {
 
-  const { log, count } = register;
+  const { log } = register;
   let arrLog = log;
   arrLog.push(newObject);
   register.log = arrLog;

@@ -53,12 +53,10 @@ app.post("/api/users/:_id/exercises", (req, res) => {
       findRegisterById(_id).then((register) => {
         const { _id, username } = user;
         if (register === null) {
-          console.log("No tiene exercices");
           newRegister(_id, username, description, duration, fecha);
         } else {
           let newObject = { description, duration, date: fecha };
           registerLog(register, newObject);
-          //res.send("ESTE ID SI TENE REGISTRO DE EXERCICES");
         }
         res.json({
           _id,
@@ -72,6 +70,20 @@ app.post("/api/users/:_id/exercises", (req, res) => {
   });
 });
 ///////////////////////////////////////////////
+
+/////////8
+
+app.get("/api/users/:_id/logs", (req, res) => {
+  const { _id } = req.params;
+
+  findRegisterById(_id).then((register) => {
+    if (register === null) {
+      res.send("_ID no se encuentra");
+    } else {
+      res.json(register);
+    }
+  });
+});
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log("Your app is listening on port " + listener.address().port);
