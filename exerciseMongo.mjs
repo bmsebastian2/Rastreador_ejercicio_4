@@ -9,11 +9,11 @@ export const AddNewExcercis = (user, objectExcercis, fecha, id) => {
 
   const filter = { _id: id };
   const update = {
+    _id,
     username,
-    description,
-    duration,
     date: fecha,
-    _id: _id,
+    duration,
+    description,
   };
   return Schema.exerci.findOneAndUpdate(filter, update, {
     new: true,
