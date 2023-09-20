@@ -6,16 +6,8 @@ import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import { findAllUsers, AddNewUser, findUserById } from "./userMongo.mjs";
 import { AddNewExcercis } from "./exerciseMongo.mjs";
-import { newRegister } from "./registerMongoose.mjs";
-import { resolve } from "path";
-// import {
-//   AddNewUser,
-//   findUserById,
-//   findRegisterById,
-//   newRegister,
-//   registerLog,
-// } from "./schemanMongoo.mjs";
-// import { now } from "mongoose";
+import { newRegister, findRegisterById } from "./registerMongoose.mjs";
+//import { resolve } from "path";
 
 dotenv.config();
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
@@ -28,8 +20,6 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/index.html");
 });
 
-// PRUEBA DEL 1 AL 6///////////////////////////
-
 app.get("/api/users", (req, res) => {
   findAllUsers().then((result) => {
     res.send(result);
@@ -41,10 +31,6 @@ app.post("/api/users", (req, res) => {
   AddNewUser(userName).then((resp) => res.json(resp));
 });
 
-////////////////////////////////////////////////
-
-// PRUEBA 6/////////////////////////////////////
-
 app.post("/api/users/:_id/exercises", async (req, res) => {
   const fecha = formatoFecha(req.body.date);
   const { body } = req;
@@ -54,60 +40,23 @@ app.post("/api/users/:_id/exercises", async (req, res) => {
       const exerci = await AddNewExcercis(user, body, fecha, body._id);
       newRegister(exerci);
       res.json(exerci);
-      //   AddNewExcercis(user, body, fecha).then(async (exerci) => {
-      //     let register = await findRegisterById(user._id);
-      //     if (register) {
-      //       console.log("n");
-      //     } else {
-      //       newRegister(user, exerci);
-      //     }
-
-      //     res.json(exerci);
-      //   });
-      // } else {
     } else {
       res.send("_ID de usuario no existe");
     }
   }
-  //   const fecha = formatoFecha(date);
-  //   findUserById(_id).then((user) => {
-  //     if (user === null) {
-  //       res.send("_ID de usuario no existe");
-  //     } else {
-  //       findRegisterById(_id).then((register) => {
-  //         const { _id, username } = user;
-  //         if (register === null) {
-  //           newRegister(_id, username, description, duration, fecha);
-  //         } else {
-  //           let newObject = { description, duration, date: fecha };
-  //           registerLog(register, newObject);
-  //         }
-  //         res.json({
-  //           _id,
-  //           username,
-  //           date: fecha,
-  //           duration: Number.parseInt(duration),
-  //           description,
-  //         });
-  //       });
-  //     }
-  //   });
 });
-///////////////////////////////////////////////
 
-/////////8
+app.get("/api/users/:_id/logs", (req, res) => {
+  const { _id } = req.params;
 
-// app.get("/api/users/:_id/logs", (req, res) => {
-//   const { _id } = req.params;
-
-//   findRegisterById(_id).then((register) => {
-//     if (register === null) {
-//       res.send("_ID no se encuentra");
-//     } else {
-//       res.json(register);
-//     }
-//   });
-// });
+  findRegisterById(_id).then((register) => {
+    if (register === null) {
+      res.send("_ID no se encuentra");
+    } else {
+      res.json(register);
+    }
+  });
+});
 
 const listener = app.listen(process.env.PORT || 3000, () => {
   console.log("Your app is listening on port " + listener.address().port);
@@ -116,3 +65,36 @@ const listener = app.listen(process.env.PORT || 3000, () => {
 function formatoFecha(date) {
   return (date ? new Date(`${date}T00:00:00`) : new Date()).toDateString();
 }
+
+// import {
+//   AddNewUser,
+//   findUserById,
+//   findRegisterById,
+//   newRegister,
+//   registerLog,
+// } from "./schemanMongoo.mjs";
+// import { now } from "mongoose";
+
+//   const fecha = formatoFecha(date);
+//   findUserById(_id).then((user) => {
+//     if (user === null) {
+//       res.send("_ID de usuario no existe");
+//     } else {
+//       findRegisterById(_id).then((register) => {
+//         const { _id, username } = user;
+//         if (register === null) {
+//           newRegister(_id, username, description, duration, fecha);
+//         } else {
+//           let newObject = { description, duration, date: fecha };
+//           registerLog(register, newObject);
+//         }
+//         res.json({
+//           _id,
+//           username,
+//           date: fecha,
+//           duration: Number.parseInt(duration),
+//           description,
+//         });
+//       });
+//     }
+//   });
