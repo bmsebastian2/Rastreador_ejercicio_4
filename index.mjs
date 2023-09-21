@@ -32,8 +32,8 @@ app.post("/api/users", (req, res) => {
 });
 
 app.post("/api/users/:_id/exercises", async (req, res) => {
-  const fecha = formatoFecha(req.body.date);
   const { body } = req;
+  const fecha = formatoFecha(body.date);
   if (body._id) {
     const user = await findUserById(body._id);
     if (user) {

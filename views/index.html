@@ -20,9 +20,9 @@
       </form>
     </div>
     <div class="div5 rack">
-      <form action="/api/users/:_id/exercises" method="post">
+      <form id="exercise-form" method="post">
         <h3>Agregar ejercicio</h3>
-        <input name="_id" type="text" required placeholder="ID" />
+        <input id="uid" name="_id" type="text" required placeholder="ID" />
         <input name="description" required type="text" placeholder="DESCRIPTION" />
         <input name="duration" required type="number" placeholder="DURATION(MINS)" />
         <input name='date' type="date" placeholder="DATE (YYYY-MM-DD)" />
@@ -37,5 +37,16 @@
       <p>by: bmsebastian2@gmail.com</p>
     </div>
   </div>
+
+  <script>
+    const exerciseForm = document.getElementById("exercise-form");
+
+    exerciseForm.addEventListener("submit", () => {
+      const userId = document.getElementById("uid").value;
+      exerciseForm.action = `/api/users/${userId}/exercises`;
+
+      exerciseForm.submit();
+    });
+  </script>
 </body>
 </html>
